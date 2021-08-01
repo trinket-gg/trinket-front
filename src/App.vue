@@ -1,5 +1,6 @@
 <template>
-  <div class="container mx-auto h-full">
+  <Navbar />
+  <div class="container mx-auto">
     <router-view></router-view>
   </div>
 </template>
