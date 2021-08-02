@@ -9,10 +9,18 @@ import 'virtual:windi.css'
 import VueAxios from 'vue-axios'
 import axios from 'axios'
 
+const instance = axios.create({
+  baseURL: 'http://localhost:4000',
+  timeout: 1000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
 // Router
 import router from './router.js'
 
 const app = createApp(App)
 app.use(router)
-app.use(VueAxios, axios).provide('axios', app.config.globalProperties.axios)
+app.use(VueAxios, axios).provide('axios', instance)
 app.mount('#app')

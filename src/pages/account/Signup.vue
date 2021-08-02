@@ -16,24 +16,24 @@
         </div>
         <div class="flex flex-col mt-4">
           <label for="username_lol" class="text-tkt-text-primary">Username (League of Legends)</label>
-          <input class="form-input text-input" type="text" v-model="usernameLol" placeholder="Enter your summoner name" />
-          <span v-show="usernameLolError" class="mt-2 text-red-600">{{ usernameLolError }}</span>
+          <input class="form-input text-input" type="text" v-model="username_riot" placeholder="Enter your summoner name" />
+          <span v-show="usernameRiotError" class="mt-2 text-red-600">{{ usernameRiotError }}</span>
         </div>
         <div class="flex flex-col mt-4">
           <label for="birthday" class="text-tkt-text-primary">Birthday</label>
-          <input class="form-input text-input" type="date" v-model="birthday" placeholder="Enter your birthday" />
-          <span v-show="birthdayError" class="mt-2 text-red-600">{{ birthdayError }}</span>
+          <input class="form-input text-input" type="date" v-model="birthdate" placeholder="Enter your birthday" />
+          <span v-show="birthdateError" class="mt-2 text-red-600">{{ birthdateError }}</span>
         </div>
         <div class="flex flex-col 2xl:flex-row mt-4">
           <div class="flex flex-col">
             <label for="pwd" class="text-tkt-text-primary">Password</label>
-            <input class="form-input text-input 2xl:w-19/20" v-model="pwd" placeholder="Enter your password" />
-            <span v-show="pwdError" class="mt-2 text-red-600">{{ pwdError }}</span>
+            <input class="form-input text-input 2xl:w-19/20" type="password" v-model="password" placeholder="Enter your password" />
+            <span v-show="passwordError" class="mt-2 text-red-600">{{ passwordError }}</span>
           </div>
           <div class="flex flex-col 2xl:ml-auto mt-4 2xl:mt-0">
             <label for="pwd_confirm" class="text-tkt-text-primary">Confirm password</label>
-            <input class="form-input text-input" type="text" v-model="pwdConfirm" placeholder="Confirm your password" />
-            <span v-show="pwdConfirmError" class="mt-2 text-red-600">{{ pwdConfirmError }}</span>
+            <input class="form-input text-input" type="password" v-model="passswordConfirm" placeholder="Confirm your password" />
+            <span v-show="passswordConfirmError" class="mt-2 text-red-600">{{ passswordConfirmError }}</span>
           </div>
         </div>
         <div class="flex flex-col mt-5">
@@ -72,31 +72,39 @@
 //   }
 // })
 
-import { ref, reactive, watch, toRefs } from 'vue'
+import { ref, reactive, watch, toRefs, inject } from 'vue'
+import { useRouter } from 'vue-router'
 import { useField, useForm } from 'vee-validate'
 import * as yup from 'yup';
 
+const axios = inject('axios')
+const router = useRouter()
 const loading = ref(false)
 
 const schemaSignup = yup.object({
   email: yup.string().required().email(),
-  usernameLol: yup.string().required(),
-  birthday: yup.date().required(),
-  pwd: yup.string().required().min(8),
-  pwdConfirm: yup.string().required().min(8)
+  username_riot: yup.string().required(),
+  birthdate: yup.date().required(),
+  password: yup.string().required().min(8),
+  passswordConfirm: yup.string().required().min(8).oneOf([yup.ref('password'), null], 'Passwords must match')
 });
 
-const { handleSubmit, errors } = useForm({ validationSchema: schemaSignup })
+const { handleSubmit } = useForm({ validationSchema: schemaSignup })
 
-const onSubmit = handleSubmit((values) => {
+const onSubmit = handleSubmit( async (values) => {
   loading.value = true
-  console.log(JSON.stringify(values, null, 2));
+  try {
+    const response = await axios.post('/users', values)
+    router.push({ path: '/' })
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 const { value: email, errorMessage: emailError } = useField('email')
-const { value: usernameLol, errorMessage: usernameLolError } = useField('usernameLol')
-const { value: birthday, errorMessage: birthdayError } = useField('birthday')
-const { value: pwd, errorMessage: pwdError } = useField('pwd')
-const { value: pwdConfirm, errorMessage: pwdConfirmError } = useField('pwdConfirm')
+const { value: username_riot, errorMessage: usernameRiotError } = useField('username_riot')
+const { value: birthdate, errorMessage: birthdateError } = useField('birthdate')
+const { value: password, errorMessage: passwordError } = useField('password')
+const { value: passswordConfirm, errorMessage: passswordConfirmError } = useField('passswordConfirm')
 
 </script>
