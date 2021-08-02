@@ -14,5 +14,9 @@ export default defineConfig({
         'tkt-text-secondary': '#94A3B8',
       }
     }
-  }
+  },
+  plugins: [
+    require('windicss/plugin/forms'),
+    // ...
+  ],
 })

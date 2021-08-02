@@ -1,0 +1,16 @@
+
+.form-input {
+  @apply rounded-md border focus:(outline-none) #{!important};
+
+  &.text-input {
+    @apply p-4 mt-2 text-tkt-text-secondary bg-tkt-black-bg-light border-tkt-black-bg-light focus:(border-tkt-primary) #{!important};
+  }
+
+  &.check-input {
+    @apply p-2.5 bg-tkt-black-bg-light ring-offset-0 checked:bg-tkt-primary focus:ring-tkt-black-bg-light #{!important};
+  }
+}
+
+input[type=date]::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+}
