@@ -7,7 +7,7 @@
   }
 
   &.check-input {
-    @apply p-2.5 bg-tkt-black-bg-light ring-offset-0 checked:bg-tkt-primary focus:ring-tkt-black-bg-light #{!important};
+    @apply p-2.5 border-[2.5px] bg-tkt-black-bg-light ring-offset-0 cursor-pointer checked:bg-tkt-primary focus:ring-tkt-black-bg-light #{!important};
   }
 }
 

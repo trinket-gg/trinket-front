@@ -30,13 +30,13 @@
             <input class="form-input text-input" type="text" name="pwd_confirm" placeholder="Confirm your password" />
           </div>
         </div>
-        <div class="flex flex-col mt-4">
+        <div class="flex flex-col mt-5">
           <label class="flex items-center">
             <input class="form-input check-input h-5 w-5 text-tkt-primary" type="checkbox" name="birthday">
-            <span class="text-tkt-text-primary select-none ml-2">I agree The Designership design system is lit.</span>
+            <span class="text-tkt-text-primary cursor-pointer select-none ml-2">I agree The Designership design system is lit.</span>
           </label>
         </div>
-        <div class="mt-7">
+        <div class="mt-6">
           <button class="btn btn-primary w-full" type="submit">Create</button>
         </div>
       </form>
