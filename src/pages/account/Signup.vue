@@ -13,38 +13,42 @@
           <label for="email" class="text-tkt-text-primary">{{ $t('form.email.label') }}</label>
           <input class="form-input text-input" v-model="email" 
                  type="text" :placeholder="$t('form.email.placeholder')" >
-          <span v-if="emailError" class="mt-2 text-red-600">{{ $t(`form.errors.${emailError.key}`, emailError.values) }}</span>
+          <span v-if="emailError" class="mt-2 text-red-600">
+            {{ $t(`form.errors.${emailError.key}`, emailError.values) }}
+          </span>
         </div>
         <div class="flex flex-col mt-4">
           <label for="username_lol" class="text-tkt-text-primary">{{ $t('form.username.label') }} (League of Legends)</label>
           <input class="form-input text-input" v-model="username_riot" 
                  type="text" :placeholder="$t('form.username.placeholder')" >
-          <span v-if="usernameRiotError" class="mt-2 text-red-600">{{ $t(`form.errors.${usernameRiotError.key}`, usernameRiotError.values) }}</span>
+          <span v-if="usernameRiotError" class="mt-2 text-red-600">
+            {{ $t(`form.errors.${usernameRiotError.key}`, usernameRiotError.values) }}
+          </span>
         </div>
         <div class="flex flex-col mt-4">
           <label for="birthday" class="text-tkt-text-primary">{{ $t('form.birthdate.label') }}</label>
           <input class="form-input text-input" v-model="birthdate" type="date" >
-          <span v-if="birthdateError" class="mt-2 text-red-600">{{ $t(`form.errors.${birthdateError.key}`, birthdateError.values) }}</span>
+          <span v-if="birthdateError" class="mt-2 text-red-600">
+            {{ $t(`form.errors.${birthdateError.key}`, birthdateError.values) }}
+          </span>
         </div>
         <div class="flex flex-col 2xl:flex-row mt-4">
           <div class="flex flex-col">
             <label for="pwd" class="text-tkt-text-primary">{{ $t('form.password.label') }}</label>
             <input class="form-input text-input 2xl:w-19/20" v-model="password" 
                    type="password" :placeholder="$t('form.password.placeholder')" >
-            <span v-if="passwordError" class="mt-2 text-red-600">{{ $t(`form.errors.${passwordError.key}`, passwordError.values) }}</span>
+            <span v-if="passwordError" class="mt-2 text-red-600">
+              {{ $t(`form.errors.${passwordError.key}`, passwordError.values) }}
+            </span>
           </div>
           <div class="flex flex-col 2xl:ml-auto mt-4 2xl:mt-0">
             <label for="pwd_confirm" class="text-tkt-text-primary">{{ $t('form.password_confirm.label') }}</label>
             <input class="form-input text-input" v-model="passswordConfirm" 
                    type="password" :placeholder="$t('form.password_confirm.placeholder')" >
-            <span v-if="passswordConfirmError" class="mt-2 text-red-600">{{ $t(`form.errors.${passswordConfirmError.key ?? passswordConfirmError}`, passswordConfirmError.values) }}</span>
+            <span v-if="passswordConfirmError" class="mt-2 text-red-600">
+              {{ $t(`form.errors.${passswordConfirmError.key ?? passswordConfirmError}`, passswordConfirmError.values) }}
+            </span>
           </div>
-        </div>
-        <div class="flex flex-col mt-5">
-          <label class="flex items-center">
-            <input class="form-input check-input h-5 w-5 text-tkt-primary" type="checkbox" name="birthday">
-            <span class="text-tkt-text-primary cursor-pointer select-none ml-2">I agree The Designership design system is lit.</span>
-          </label>
         </div>
         <div class="mt-6">
           <button class="btn btn-primary flex justify-center w-full" type="submit">
@@ -67,7 +71,7 @@
 
 <script setup>
 
-import { ref, reactive, watch, toRefs, inject } from 'vue'
+import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import { useField, useForm } from 'vee-validate'
 import * as yup from 'yup';
@@ -86,13 +90,10 @@ const schemaSignup = yup.object({
 
 const { handleSubmit } = useForm({ validationSchema: schemaSignup })
 
-const onSubmit = handleSubmit( async (values, yes) => {
+const onSubmit = handleSubmit( async (values) => {
   loading.value = true
-
-  console.log(yes)
-
   try {
-    const response = await axios.post('/users', values)
+    await axios.post('/users', values)
     router.push({ path: '/' })
   } catch (e) {
     console.log(e)
