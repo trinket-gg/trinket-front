@@ -70,7 +70,6 @@
 import { ref, reactive, watch, toRefs, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import { useField, useForm } from 'vee-validate'
-import { useI18n } from 'vue-i18n'
 import * as yup from 'yup';
 
 const axios = inject('axios')
