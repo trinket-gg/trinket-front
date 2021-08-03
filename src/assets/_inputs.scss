@@ -9,6 +9,10 @@
   &.check-input {
     @apply p-2.5 border-[2.5px] bg-tkt-black-bg-light ring-offset-0 cursor-pointer checked:bg-tkt-primary focus:ring-tkt-black-bg-light #{!important};
   }
+
+  &.select-input {
+    @apply px-4 bg-tkt-black-bg-light text-white border-transparent ring-0 focus:outline-none #{!important};
+  }
 }
 
 input[type=date]::-webkit-calendar-picker-indicator {
