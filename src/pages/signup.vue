@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="mt-6">
-          <button class="btn btn-primary flex justify-center w-full" type="submit">
+          <button class="btn btn-primary p-3 text-xl flex justify-center w-full" type="submit">
             <template v-if="!loading">
               {{ $t('signup.submit') }}
             </template>

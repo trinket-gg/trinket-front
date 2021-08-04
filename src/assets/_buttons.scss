@@ -1,6 +1,6 @@
 
 .btn {
-  @apply p-3 rounded-md font-medium text-xl focus:outline-none #{!important};
+  @apply rounded-md font-medium focus:outline-none #{!important};
 }
 
 .btn-primary {
@@ -8,5 +8,13 @@
 
   &:hover {
     @apply opacity-95;
+  }
+}
+
+.btn-secondary {
+  @apply bg-transparent border-2 border-tkt-primary text-tkt-text-primary;
+
+  &:hover {
+    @apply text-tkt-primary;
   }
 }

@@ -1,6 +1,8 @@
 export default {
   navbar: {
-    language: 'Langue'
+    language: 'Langue',
+    signup: 'Créer un compte',
+    signin: 'Se connecter',
   },
   home: {
     'main-title': "Page d'accueil"
