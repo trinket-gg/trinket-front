@@ -27,6 +27,9 @@
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { useI18n } from 'vue-i18n/index'
 import { useLocalStorage } from '@vueuse/core'
+import { onMounted } from 'vue'
+
+onMounted(() => locale.value = selectedLanguage.value)
 
 const languages = { en: 'English', fr: 'Français' }
 const { locale, availableLocales } = useI18n({ useScope: 'global' })
