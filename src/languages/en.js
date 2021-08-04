@@ -1,4 +1,7 @@
 export default {
+  navbar: {
+    language: 'Language'
+  },
   home: {
     'main-title': "Home page"
   },
