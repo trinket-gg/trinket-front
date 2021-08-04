@@ -1,9 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import './assets/main.scss'
-
-// Windicss
-import 'virtual:windi.css'
+import 'virtual:windi.css' // Windicss
+import i18n from './plugins/vue-i18n' // Vue i18n
+import './plugins/yup-locale.js' // Yup locale for translation with i18n
 
 // Axios
 import VueAxios from 'vue-axios'
@@ -12,19 +12,14 @@ import axios from 'axios'
 const instance = axios.create({
   baseURL: 'http://localhost:4000',
   timeout: 1000,
-  headers: {
-    'Content-Type': 'application/json'
-  }
+  headers: { 'Content-Type': 'application/json' }
 });
 
-// Vue i18n
-import i18n from './plugins/vue-i18n'
-
 // Router
-import router from './router.js'
+import { createRouter, createWebHistory } from 'vue-router'
+import routes from "virtual:generated-pages";
+const router = createRouter({ history: createWebHistory('/'), routes })
 
-// Yup locale for translation with i18n
-import './plugins/yup-locale.js'
 
 const app = createApp(App)
 app.use(router)
