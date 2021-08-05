@@ -16,8 +16,7 @@ export const auth = {
           Cookies.set('trinket_token', `Bearer ${token}`)
 
           const token_decoded = jwt_decode(token)
-          response = await axios.get(`/users/${token_decoded._id}`)
-          const user = response.data.res
+          const user = token_decoded.user
           
           commit('setUser', user)
 
