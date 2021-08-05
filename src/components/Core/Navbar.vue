@@ -11,19 +11,15 @@
           {{ user.username_riot }}
         </MenuButton>
         <MenuItems class="absolute p-2 mt-2 bg-white right-0 rounded">
-          <MenuItem>
-            <router-link to="/profile" custom v-slot="{ navigate }">
-              <div role="link" class="w-full px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none hover:(bg-tkt-black-bg-hover bg-opacity-10)" 
-                   @click="navigate">
-                {{ $t('navbar.profile') }}
-              </div>
+          <MenuItem as="div" class="flex" >
+            <router-link to="/profile" 
+                         class="w-full px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none hover:(bg-tkt-black-bg-hover bg-opacity-10)">
+              {{ $t('navbar.profile') }}
             </router-link>
           </MenuItem>
-          <MenuItem>
-            <div class="px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none hover:(bg-tkt-black-bg-hover bg-opacity-10)"
-                 @click="userLogout()">
-              {{ $t('navbar.logout') }}
-            </div>
+          <MenuItem as="div" class="px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none hover:(bg-tkt-black-bg-hover bg-opacity-10)"
+                    @click="userLogout()">
+            {{ $t('navbar.logout') }}
           </MenuItem>
         </MenuItems>
       </Menu>
