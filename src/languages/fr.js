@@ -3,6 +3,8 @@ export default {
     language: 'Langue',
     signup: 'Créer un compte',
     signin: 'Se connecter',
+    profile: 'Profil',
+    logout: 'Déconnexion'
   },
   home: {
     'main-title': "Page d'accueil"

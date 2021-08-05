@@ -3,6 +3,8 @@ export default {
     language: 'Language',
     signup: 'Create an account',
     signin: 'Sign in',
+    profile: 'Profile',
+    logout: 'Logout'
   },
   home: {
     'main-title': "Home page"
