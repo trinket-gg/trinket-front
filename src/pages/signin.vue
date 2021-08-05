@@ -31,7 +31,7 @@
               {{ $t('signin.submit') }}
             </template>
             <template v-else>
-              <SvgIcon class="animate-spin h-5 w-5 my-1 text-black" name="loader"/>
+              <SvgIcon class="animate-spin h-5 w-5 my-1" name="loader"/>
             </template>
           </button>
         </div>
