@@ -32,6 +32,7 @@
 </template>
 
 <script setup>
+
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { useI18n } from 'vue-i18n/index'
 import { useLocalStorage } from '@vueuse/core'

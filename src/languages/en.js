@@ -11,6 +11,10 @@ export default {
     'main-title': "Create account",
     submit: "Create"
   },
+  signin: {
+    'main-title': "Sign in",
+    submit: "Sign in"
+  },
   form: {
     errors: {
       required: "This field is required",

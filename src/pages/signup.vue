@@ -1,17 +1,14 @@
 <template>
-  <div class="flex flex-col lg:flex-row justify-center items-center pt-12 lg:pt-36">
+  <div class="flex flex-col lg:flex-row justify-center items-center">
     <div class="flex justify-center items-center w-2/3 lg:w-1/2 relative">
       <img src="/group-images-create-account.svg">
-      <!-- <div class="w-[350px] h-[222px] -mt-20 -mr-56 shadow-2xl rounded-xl bg-[#CBD5E1]" />
-      <div class="w-[308px] h-[195px] -mb-56 shadow-2xl rounded-xl bg-[#CBD5E1]" />
-      <div class="w-[291px] h-[185px] -ml-42 shadow-2xl rounded-xl bg-[#CBD5E1]" /> -->
     </div>
     <div class="flex flex-col lg:px-15 xl:px-25 w-2/3 lg:w-1/2 my-12 lg:my-0">
       <h1 class="text-3xl text-white font-bold">{{ $t('signup.main-title') }}</h1>
       <form class="flex flex-col" @submit.prevent="onSubmit">
         <div class="flex flex-col mt-4">
           <label for="email" class="text-tkt-text-primary">{{ $t('form.email.label') }}</label>
-          <input class="form-input text-input" v-model="email" 
+          <input class="form-input text-input" v-model="email" autocomplete="email"
                  type="text" :placeholder="$t('form.email.placeholder')" >
           <span v-if="emailError" class="mt-2 text-red-600">
             {{ $t(`form.errors.${emailError.key}`, emailError.values) }}

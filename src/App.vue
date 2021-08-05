@@ -1,10 +1,6 @@
 <template>
-  <Navbar :class="'h-' + heightNavbar" />
-  <div class="bg-tkt-black-bg" :style="'min-height: calc(100% - ' + heightNavbar / 4 + 'rem);'">
-    <router-view class="container mx-auto" />
+  <Navbar class="h-16"  />
+  <div class="flex bg-tkt-black-bg" style="min-height: calc(100% - 4rem);'">
+    <router-view class="container mx-auto" style="min-height: inherit;" />
   </div>
 </template>
-
-<script setup>
-const heightNavbar = 16
-</script>

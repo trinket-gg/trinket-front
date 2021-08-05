@@ -11,6 +11,10 @@ export default {
     'main-title': "Créer un compte",
     submit: "Créer"
   },
+  signin: {
+    'main-title': "Connexion",
+    submit: "Se connecter"
+  },
   form: {
     errors: {
       required: "Le champ est obligatoire",
