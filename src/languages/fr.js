@@ -1,6 +1,10 @@
 export default {
   navbar: {
-    language: 'Langue'
+    language: 'Langue',
+    signup: 'Créer un compte',
+    signin: 'Se connecter',
+    profile: 'Profil',
+    logout: 'Déconnexion'
   },
   home: {
     'main-title': "Page d'accueil"
@@ -9,13 +13,18 @@ export default {
     'main-title': "Créer un compte",
     submit: "Créer"
   },
+  signin: {
+    'main-title': "Connexion",
+    submit: "Se connecter"
+  },
   form: {
     errors: {
       required: "Le champ est obligatoire",
       email: "L'email n'est pas valide",
       min: 'Le champ doit faire au minimum {min} caractères',
       max: 'Le champ doit faire au maximum {max} caractères',
-      matchPwds: 'Les mots de passes doivent correspondre'
+      matchPwds: 'Les mots de passes doivent correspondre',
+      login: "Problème dans l'email ou le mot passe"
     },
     email: {
       label: "Email",

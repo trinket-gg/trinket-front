@@ -1,6 +1,10 @@
 export default {
   navbar: {
-    language: 'Language'
+    language: 'Language',
+    signup: 'Create an account',
+    signin: 'Sign in',
+    profile: 'Profile',
+    logout: 'Logout'
   },
   home: {
     'main-title': "Home page"
@@ -9,13 +13,18 @@ export default {
     'main-title': "Create account",
     submit: "Create"
   },
+  signin: {
+    'main-title': "Sign in",
+    submit: "Sign in"
+  },
   form: {
     errors: {
       required: "This field is required",
       email: "This email is not valid",
       min: 'This field must be at least {min} characters',
       max: 'This field must be at most {max} characters',
-      matchPwds: 'Passwords must match'
+      matchPwds: 'Passwords must match',
+      login: "Error in the email or the password"
     },
     email: {
       label: "Email",
