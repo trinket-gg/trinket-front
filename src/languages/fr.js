@@ -21,7 +21,8 @@ export default {
       email: "L'email n'est pas valide",
       min: 'Le champ doit faire au minimum {min} caractères',
       max: 'Le champ doit faire au maximum {max} caractères',
-      matchPwds: 'Les mots de passes doivent correspondre'
+      matchPwds: 'Les mots de passes doivent correspondre',
+      login: "Problème dans l'email ou le mot passe"
     },
     email: {
       label: "Email",

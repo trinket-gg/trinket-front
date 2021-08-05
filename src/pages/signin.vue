@@ -21,6 +21,9 @@
           <span v-if="passwordError" class="mt-2 text-red-600">
             {{ $t(`form.errors.${passwordError.key}`, passwordError.values) }}
           </span>
+          <span v-if="showLoginError" class="mt-2 text-red-600">
+            {{ $t('form.errors.login') }}
+          </span>
         </div>
         <div class="mt-6">
           <button class="btn btn-primary p-3 text-xl flex justify-center w-full" type="submit">
@@ -28,10 +31,7 @@
               {{ $t('signin.submit') }}
             </template>
             <template v-else>
-              <svg class="animate-spin h-5 w-5 my-1 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
+              <SvgIcon class="animate-spin h-5 w-5 my-1 text-black" name="loader"/>
             </template>
           </button>
         </div>
@@ -42,14 +42,17 @@
 
 <script setup>
 
-import { ref, inject } from 'vue'
+import { ref } from 'vue'
+import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { useField, useForm } from 'vee-validate'
-import * as yup from 'yup';
+import * as yup from 'yup'
+import SvgIcon from '../components/SvgIcon.vue'
 
-const axios = inject('axios')
+const store = useStore()
 const router = useRouter()
 const loading = ref(false)
+const showLoginError = ref(false)
 
 const schemaSignup = yup.object({
   email: yup.string().required().email(),
@@ -61,11 +64,11 @@ const { handleSubmit } = useForm({ validationSchema: schemaSignup })
 const onSubmit = handleSubmit( async (values) => {
   loading.value = true
   try {
-    const response = await axios.post('/users/login', values)
-    console.log(response)
-    router.push({ path: '/' })
+    await store.dispatch('auth/login', values)
+    router.push('/')
   } catch (e) {
-    console.log(e)
+    showLoginError.value = true
+    loading.value = false
   }
 })
 

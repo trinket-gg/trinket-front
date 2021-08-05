@@ -1,28 +1,27 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import './assets/main.scss'
+import './assets/css/main.scss'
 import 'virtual:windi.css' // Windicss
 import i18n from './plugins/vue-i18n' // Vue i18n
 import './plugins/yup-locale.js' // Yup locale for translation with i18n
+import 'virtual:svg-icons-register';
 
 // Axios
 import VueAxios from 'vue-axios'
 import axios from 'axios'
-
-const instance = axios.create({
-  baseURL: 'http://localhost:4000',
-  timeout: 1000,
-  headers: { 'Content-Type': 'application/json' }
-});
+import instance from './plugins/axios-instance'
 
 // Router
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from "virtual:generated-pages";
 const router = createRouter({ history: createWebHistory('/'), routes })
 
+// Store
+import store from './store/index'
 
-const app = createApp(App)
-app.use(router)
-app.use(i18n)
-app.use(VueAxios, axios).provide('axios', instance)
-app.mount('#app')
+createApp(App)
+  .use(router)
+  .use(store)
+  .use(i18n)
+  .use(VueAxios, axios).provide('axios', instance)
+  .mount('#app')

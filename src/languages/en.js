@@ -21,7 +21,8 @@ export default {
       email: "This email is not valid",
       min: 'This field must be at least {min} characters',
       max: 'This field must be at most {max} characters',
-      matchPwds: 'Passwords must match'
+      matchPwds: 'Passwords must match',
+      login: "Error in the email or the password"
     },
     email: {
       label: "Email",
