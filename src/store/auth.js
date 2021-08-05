@@ -25,16 +25,24 @@ export const auth = {
           reject('error')
         }
       })
+    },
+
+    logout({ commit }) {
+      Cookies.remove('trinket_token')
+      commit('logout')
     }
   },
   mutations: {
     authSuccess: (state, user) => {
       state.user = user
     },
+    logout: (state) => {
+      state.user = {}
+    },
   },
   getters: {
     isAuthenticated(state) {
-      return !!state.token
+      return !!Object.keys(state.user).length
     }
   }
 }

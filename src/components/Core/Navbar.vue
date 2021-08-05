@@ -6,7 +6,26 @@
       </router-link>
     </div>
     <div class="flex items-center mr-16">
-      <div class="flex items-center">
+      <Menu v-if="userIsAuthenticated" as="div" class="relative ml-12">
+        <MenuButton class="text-white focus:outline-none">
+          {{ user.username_riot }}
+        </MenuButton>
+        <MenuItems class="absolute p-2 w-24 mt-2 bg-white right-0 rounded">
+          <MenuItem>
+            <router-link as="div" to="/profile" 
+                         class="px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none hover:(bg-tkt-black-bg-hover bg-opacity-10)">
+              Profile
+            </router-link>
+          </MenuItem>
+          <MenuItem>
+            <div class="px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none hover:(bg-tkt-black-bg-hover bg-opacity-10)"
+                 @click="userLogout()">
+              Logout
+            </div>
+          </MenuItem>
+        </MenuItems>
+      </Menu>
+      <div v-if="!userIsAuthenticated" class="flex items-center">
         <router-link to="/signin">
           <button class="btn btn-secondary px-5 py-1.5" type="submit">{{ $t('navbar.signin') }}</button>
         </router-link>
@@ -36,7 +55,16 @@
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { useI18n } from 'vue-i18n/index'
 import { useLocalStorage } from '@vueuse/core'
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 
+// User
+const store = useStore()
+const userIsAuthenticated = computed(() => store.getters['auth/isAuthenticated'])
+const user = computed(() => store.state.auth.user)
+const userLogout = () => store.dispatch('auth/logout')
+
+// Languages
 const languages = { en: 'English', fr: 'Français' }
 const { locale, availableLocales } = useI18n({ useScope: 'global' })
 const navigatorLanguage = navigator.language.split('-')[0]
