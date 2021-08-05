@@ -2,35 +2,24 @@ import axios from '../plugins/axios-instance'
 import Cookies from 'js-cookie'
 import jwt_decode from 'jwt-decode'
 
-const getUser = async (user_id) => {
-  const request = await axios.get(`/users/${user_id}`)
-  return request.data.res
-}
-
-const initUser = async () => {
-  const token = Cookies.get('trinket_token')
-  if (token) {
-    const token_decoded = jwt_decode(token)
-    return await getUser(token_decoded._id)
-  }
-}
-
 export const auth = {
   namespaced: true,
   state: {
-    user: await initUser() || {}
+    user: {}
   },
   actions: {
     login({ commit }, userCredentials) {
       return new Promise( async (resolve, reject) => {
         try {
-          const response = await axios.post('/users/login', userCredentials)
+          let response = await axios.post('/users/login', userCredentials)
           const token = response.data.res
           Cookies.set('trinket_token', `Bearer ${token}`)
+
           const token_decoded = jwt_decode(token)
-          const user = await getUser(token_decoded._id)
+          response = await axios.get(`/users/${token_decoded._id}`)
+          const user = response.data.res
           
-          commit('authSuccess', user)
+          commit('setUser', user)
 
           resolve()
         } catch (err) {
@@ -42,10 +31,10 @@ export const auth = {
     logout({ commit }) {
       Cookies.remove('trinket_token')
       commit('logout')
-    }
+    },
   },
   mutations: {
-    authSuccess: (state, user) => {
+    setUser: (state, user) => {
       state.user = user
     },
     logout: (state) => {
