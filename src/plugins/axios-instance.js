@@ -10,19 +10,19 @@ const instance = axios.create({
   }
 })
 
-instance.interceptors.request.use((config) => {
+instance.interceptors.request.use( function (config) {
   const token = Cookies.get('trinket_token')
   if (token) config.headers['Authorization'] = token
 
   return config;
-}, (error) => {
+}, function (error) {
   return Promise.reject(error);
 })
 
-instance.interceptors.response.use(undefined, (err) => {
-  if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-    store.dispatch('auth/logout')
-  }
-})
+// instance.interceptors.response.use(undefined, (err) => {
+//   if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+//     store.dispatch('auth/logout')
+//   }
+// })
 
 export default instance

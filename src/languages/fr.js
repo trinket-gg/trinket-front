@@ -24,7 +24,9 @@ export default {
       min: 'Le champ doit faire au minimum {min} caractères',
       max: 'Le champ doit faire au maximum {max} caractères',
       matchPwds: 'Les mots de passes doivent correspondre',
-      login: "Problème dans l'email ou le mot passe"
+      login: "Problème dans l'email ou le mot passe",
+      emailExist: "L'email existe déjà",
+      usernameRiot: "Le nom d'utilisateur lol n'existe pas"
     },
     email: {
       label: "Email",

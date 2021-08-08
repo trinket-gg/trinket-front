@@ -21,11 +21,11 @@
           <span v-if="passwordError" class="mt-2 text-red-600">
             {{ $t(`form.errors.${passwordError.key}`, passwordError.values) }}
           </span>
-          <span v-if="showLoginError" class="mt-2 text-red-600">
-            {{ $t('form.errors.login') }}
-          </span>
         </div>
         <div class="mt-6">
+          <span v-if="showLoginError" class="flex mb-2 text-red-600">
+            {{ $t('form.errors.login') }}
+          </span>
           <button class="btn btn-primary p-3 text-xl flex justify-center w-full" type="submit">
             <template v-if="!loading">
               {{ $t('signin.submit') }}

@@ -48,6 +48,9 @@
           </div>
         </div>
         <div class="mt-6">
+          <span v-if="signupError" class="flex mb-2 text-red-600">
+            {{ $t(`form.errors.${signupError}`) }}
+          </span>
           <button class="btn btn-primary p-3 text-xl flex justify-center w-full" type="submit">
             <template v-if="!loading">
               {{ $t('signup.submit') }}
@@ -73,6 +76,7 @@ import * as yup from 'yup';
 const axios = inject('axios')
 const router = useRouter()
 const loading = ref(false)
+const signupError = ref(null)
 
 const schemaSignup = yup.object({
   email: yup.string().required().email(),
@@ -90,7 +94,7 @@ const onSubmit = handleSubmit( async (values) => {
     await axios.post('/users', values)
     router.push({ path: '/' })
   } catch (e) {
-    console.log(e)
+    signupError.value = e.response.data
   }
 })
 

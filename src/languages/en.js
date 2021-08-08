@@ -24,7 +24,9 @@ export default {
       min: 'This field must be at least {min} characters',
       max: 'This field must be at most {max} characters',
       matchPwds: 'Passwords must match',
-      login: "Error in the email or the password"
+      login: "Error in the email or the password",
+      emailExist: "Email already exist",
+      usernameRiot: "Summoner name doesn't exist"
     },
     email: {
       label: "Email",
