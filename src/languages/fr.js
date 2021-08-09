@@ -1,6 +1,8 @@
 export default {
   navbar: {
     language: 'Langue',
+    home: 'Accueil',
+    dashboard: 'Tableau de bord',
     signup: 'Créer un compte',
     signin: 'Se connecter',
     profile: 'Profil',

@@ -8,6 +8,9 @@ const store = createStore({
   modules: {
     auth
   },
+  state: {
+    versionDddragonLol: null
+  },
   actions: {
     async initApp({ commit }) {
       const token = Cookies.get('trinket_token') || null
@@ -15,8 +18,16 @@ const store = createStore({
         const token_decoded = jwt_decode(token)
         commit('auth/setUser', token_decoded.user)
       }
+
+      const versionsDddragonLol = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(r => r.json())
+      commit('setVersionDddragonLol', versionsDddragonLol[0])
     }
-  }
+  },
+  mutations: {
+    setVersionDddragonLol: (state, versionDddragonLol) => {
+      state.versionDddragonLol = versionDddragonLol
+    },
+  },
 })
 
 export default store

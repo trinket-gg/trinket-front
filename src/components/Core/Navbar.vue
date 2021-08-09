@@ -6,9 +6,28 @@
       </router-link>
     </div>
     <div class="flex items-center mr-16">
-      <Menu v-if="userIsAuthenticated" as="div" class="relative ml-12">
+      <router-link to="/" class="text-white">
+        {{ $t('navbar.home') }}
+      </router-link>
+      <router-link to="/dashboard" class="text-white ml-6">
+        {{ $t('navbar.dashboard') }}
+      </router-link>
+      <Menu as="div" class="relative ml-8">
         <MenuButton class="text-white focus:outline-none">
-          {{ user.username_riot }}
+          {{ $t('navbar.language') }}
+        </MenuButton>
+        <MenuItems class="absolute p-2 w-24 mt-2 bg-white right-0 rounded">
+          <MenuItem v-for="language in availableLocales" :key="language">
+            <div class="px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none hover:(bg-tkt-black-bg-hover bg-opacity-10)"
+                 @click="changeLocaleLanguage(language)">
+              {{ languages[language] }}
+            </div>
+          </MenuItem>
+        </MenuItems>
+      </Menu>
+      <Menu v-if="userIsAuthenticated" as="div" class="relative ml-8">
+        <MenuButton class="flex items-center text-white focus:outline-none">
+          <img class="h-10 w-10 rounded-full" :src="'https://ddragon.leagueoflegends.com/cdn/' + $store.state.versionDddragonLol + '/img/profileicon/' + user.riot_summoner.profileIconId + '.png'"/>
         </MenuButton>
         <MenuItems class="absolute p-2 mt-2 bg-white right-0 rounded">
           <MenuItem as="div" class="flex" >
@@ -23,7 +42,7 @@
           </MenuItem>
         </MenuItems>
       </Menu>
-      <div v-if="!userIsAuthenticated" class="flex items-center">
+      <div v-else class="flex items-center">
         <router-link to="/signin">
           <button class="btn btn-secondary px-5 py-1.5" type="submit">{{ $t('navbar.signin') }}</button>
         </router-link>
@@ -31,19 +50,6 @@
           <button class="btn btn-primary px-5 py-2 ml-7.5" type="submit">{{ $t('navbar.signup') }}</button>
         </router-link>
       </div>
-      <Menu as="div" class="relative ml-12">
-        <MenuButton class="text-white focus:outline-none">
-          {{ $t('navbar.language') }}
-        </MenuButton>
-        <MenuItems class="absolute p-2 w-24 mt-2 bg-white right-0 rounded">
-          <MenuItem v-for="language in availableLocales" :key="language">
-            <div class="px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none hover:(bg-tkt-black-bg-hover bg-opacity-10)"
-                 @click="changeLocaleLanguage(language)">
-              {{ languages[language] }}
-            </div>
-          </MenuItem>
-        </MenuItems>
-      </Menu>
     </div>
   </div>
 </template>
@@ -54,7 +60,7 @@ import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { useI18n } from 'vue-i18n/index'
 import { useLocalStorage } from '@vueuse/core'
 import { useStore } from 'vuex'
-import { onMounted, computed } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 
 // User
 const store = useStore()
@@ -63,7 +69,7 @@ const user = computed(() => store.state.auth.user)
 const userLogout = () => store.dispatch('auth/logout')
 
 // Languages
-onMounted(() => locale.value = selectedLanguage.value)
+onMounted( async () => locale.value = selectedLanguage.value)
 const languages = { en: 'English', fr: 'Français' }
 const { locale, availableLocales } = useI18n({ useScope: 'global' })
 const navigatorLanguage = navigator.language.split('-')[0]
