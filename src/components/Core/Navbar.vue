@@ -6,12 +6,14 @@
       </router-link>
     </div>
     <div class="flex items-center mr-16">
-      <router-link to="/" class="text-white">
-        {{ $t('navbar.home') }}
-      </router-link>
-      <router-link to="/dashboard" class="text-white ml-6">
-        {{ $t('navbar.dashboard') }}
-      </router-link>
+      <template v-if="userIsAuthenticated">
+        <router-link to="/" class="text-white">
+          {{ $t('navbar.home') }}
+        </router-link>
+        <router-link to="/dashboard" class="text-white ml-6">
+          {{ $t('navbar.dashboard') }}
+        </router-link>
+      </template>
       <Menu as="div" class="relative ml-8">
         <MenuButton class="text-white focus:outline-none">
           {{ $t('navbar.language') }}
@@ -42,7 +44,7 @@
           </MenuItem>
         </MenuItems>
       </Menu>
-      <div v-else class="flex items-center">
+      <div v-else class="flex items-center ml-8">
         <router-link to="/signin">
           <button class="btn btn-secondary px-5 py-1.5" type="submit">{{ $t('navbar.signin') }}</button>
         </router-link>
