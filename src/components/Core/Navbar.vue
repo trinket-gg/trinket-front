@@ -7,27 +7,29 @@
     </div>
     <div class="flex items-center mr-16">
       <template v-if="userIsAuthenticated">
-        <router-link to="/" class="text-white">
+        <router-link to="/" class="text-white text-sm font-medium">
           {{ $t('navbar.home') }}
         </router-link>
-        <router-link to="/dashboard" class="text-white ml-6">
+        <router-link to="/dashboard" class="text-white text-sm font-medium ml-6">
           {{ $t('navbar.dashboard') }}
         </router-link>
       </template>
-      <Menu as="div" class="relative ml-8">
-        <MenuButton class="text-white focus:outline-none">
-          {{ $t('navbar.language') }}
+      <Menu as="div" class="relative ml-6">
+        <MenuButton class="flex items-center bg-tkt-black-bg-light rounded-full p-2 focus:outline-none">
+          <SvgIcon class="text-white h-4 w-4" name="language" />
         </MenuButton>
-        <MenuItems class="absolute p-2 w-24 mt-2 bg-white right-0 rounded">
+        <MenuItems class="absolute p-2 mt-3 right-0 bg-white rounded">
           <MenuItem v-for="language in availableLocales" :key="language">
-            <div class="px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none hover:(bg-tkt-black-bg-hover bg-opacity-10)"
+            <div :class="[language === locale ? 'bg-tkt-primary bg-opacity-45' : 'hover:(bg-tkt-black-bg-hover bg-opacity-10)']"
+                 class="flex items-center px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none"
                  @click="changeLocaleLanguage(language)">
-              {{ languages[language] }}
+              <span>{{ languages[language] }}</span>
+              <SvgIcon v-if="language === locale" class="ml-5 w-4 h-4" name="check" />
             </div>
           </MenuItem>
         </MenuItems>
       </Menu>
-      <Menu v-if="userIsAuthenticated" as="div" class="relative ml-8">
+      <Menu v-if="userIsAuthenticated" as="div" class="relative ml-6">
         <MenuButton class="flex items-center text-white focus:outline-none">
           <img class="h-10 w-10 rounded-full" :src="'https://ddragon.leagueoflegends.com/cdn/' + $store.state.versionDddragonLol + '/img/profileicon/' + user.riot_summoner.profileIconId + '.png'"/>
         </MenuButton>
@@ -44,12 +46,12 @@
           </MenuItem>
         </MenuItems>
       </Menu>
-      <div v-else class="flex items-center ml-8">
+      <div v-if="!userIsAuthenticated" class="flex items-center ml-6">
         <router-link to="/signin">
           <button class="btn btn-secondary px-5 py-1.5" type="submit">{{ $t('navbar.signin') }}</button>
         </router-link>
         <router-link to="/signup">
-          <button class="btn btn-primary px-5 py-2 ml-7.5" type="submit">{{ $t('navbar.signup') }}</button>
+          <button class="btn btn-primary px-5 py-2 ml-6" type="submit">{{ $t('navbar.signup') }}</button>
         </router-link>
       </div>
     </div>
@@ -63,6 +65,7 @@ import { useI18n } from 'vue-i18n/index'
 import { useLocalStorage } from '@vueuse/core'
 import { useStore } from 'vuex'
 import { onMounted, ref, computed } from 'vue'
+import SvgIcon from "../SvgIcon.vue";
 
 // User
 const store = useStore()

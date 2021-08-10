@@ -1,10 +1,10 @@
 
 .btn {
-  @apply rounded-md font-medium focus:outline-none #{!important};
+  @apply rounded-md text-sm font-semibold focus:outline-none #{!important};
 }
 
 .btn-primary {
-  @apply bg-tkt-primary;
+  @apply bg-tkt-primary text-black;
 
   &:hover {
     @apply opacity-95;

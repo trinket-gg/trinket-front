@@ -4,6 +4,9 @@ export default defineConfig({
   attributify: true,
   theme: {
     extend: {
+      fontFamily: {
+        sans: 'Poppins'
+      },
       colors: {
         'tkt-black': '#131825',
         'tkt-black-bg': '#1C212E',
