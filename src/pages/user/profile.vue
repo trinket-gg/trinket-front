@@ -53,14 +53,12 @@
 
 import { computed, inject, ref } from 'vue'
 import { useField, useForm } from 'vee-validate'
-import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import * as yup from 'yup';
 
 const store = useStore()
 const user = computed(() => store.getters['auth/getUser'])
 const axios = inject('axios')
-const router = useRouter()
 const loading = ref(false)
 const signupError = ref(null)
 

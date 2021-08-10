@@ -12,9 +12,7 @@ import axios from 'axios'
 import instance from './plugins/axios-instance'
 
 // Router
-import { createRouter, createWebHistory } from 'vue-router'
-import routes from "virtual:generated-pages";
-const router = createRouter({ history: createWebHistory('/'), routes })
+import router from './plugins/router'
 
 // Store
 import store from './store/index'

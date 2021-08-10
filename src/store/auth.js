@@ -1,6 +1,7 @@
 import axios from '../plugins/axios-instance'
 import Cookies from 'js-cookie'
 import jwt_decode from 'jwt-decode'
+import router from '../plugins/router'
 
 export const auth = {
   namespaced: true,
@@ -25,6 +26,7 @@ export const auth = {
     logout({ commit }) {
       Cookies.remove('trinket_token')
       commit('logout')
+      router.push('/')
     },
   },
   mutations: {
