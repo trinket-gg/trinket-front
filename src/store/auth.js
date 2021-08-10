@@ -8,23 +8,18 @@ export const auth = {
     user: {}
   },
   actions: {
-    login({ commit }, userCredentials) {
-      return new Promise( async (resolve, reject) => {
-        try {
-          let response = await axios.post('/users/login', userCredentials)
-          const token = response.data.res
-          Cookies.set('trinket_token', `Bearer ${token}`)
+    async login({ commit, disptach }, userCredentials) {
+      try {
+        const response = await axios.post('/users/login', userCredentials)
+        const token = response.data.res
+        Cookies.set('trinket_token', `Bearer ${token}`)
 
-          const token_decoded = jwt_decode(token)
-          const user = token_decoded.user
-          
-          commit('setUser', user)
-
-          resolve()
-        } catch (err) {
-          reject()
-        }
-      })
+        const token_decoded = jwt_decode(token)
+        const { data } = await axios.get(`/users/${token_decoded._id}`)
+        commit('setUser', data.res)
+      } catch (err) {
+        disptach('logout')
+      }
     },
 
     logout({ commit }) {
@@ -43,6 +38,9 @@ export const auth = {
   getters: {
     isAuthenticated(state) {
       return !!Object.keys(state.user).length
+    },
+    getUser(state) {
+      return state.user
     }
   }
 }

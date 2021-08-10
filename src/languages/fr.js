@@ -19,6 +19,9 @@ export default {
     'main-title': "Connexion",
     submit: "Se connecter"
   },
+  profile: {
+    submit: 'Sauvegarder'
+  },
   form: {
     errors: {
       required: "Le champ est obligatoire",

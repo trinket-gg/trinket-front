@@ -35,7 +35,7 @@
         </MenuButton>
         <MenuItems class="absolute p-2 mt-2 bg-white right-0 rounded">
           <MenuItem as="div" class="flex" >
-            <router-link to="/profile" 
+            <router-link to="/user/profile" 
                          class="w-full px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none hover:(bg-tkt-black-bg-hover bg-opacity-10)">
               {{ $t('navbar.profile') }}
             </router-link>
@@ -70,7 +70,7 @@ import SvgIcon from "../SvgIcon.vue";
 // User
 const store = useStore()
 const userIsAuthenticated = computed(() => store.getters['auth/isAuthenticated'])
-const user = computed(() => store.state.auth.user)
+const user = computed(() => store.getters['auth/getUser'])
 const userLogout = () => store.dispatch('auth/logout')
 
 // Languages
