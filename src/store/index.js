@@ -34,6 +34,11 @@ const store = createStore({
       state.versionDddragonLol = versionDddragonLol
     },
   },
+  getters: {
+    getProfileIcon: (state) => {
+      return `https://ddragon.leagueoflegends.com/cdn/${state.versionDddragonLol}/img/profileicon/${state.auth.user.riot_summoner.profileIconId}.png`
+    }
+  }
 })
 
 export default store

@@ -47,7 +47,6 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { useField, useForm } from 'vee-validate'
 import * as yup from 'yup'
-import SvgIcon from '../components/SvgIcon.vue'
 
 const store = useStore()
 const router = useRouter()

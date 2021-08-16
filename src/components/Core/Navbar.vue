@@ -23,15 +23,14 @@
             <div :class="[language === locale ? 'bg-tkt-primary bg-opacity-45' : 'hover:(bg-tkt-black-bg-hover bg-opacity-10)']"
                  class="flex items-center px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none"
                  @click="changeLocaleLanguage(language)">
-              <span>{{ languages[language] }}</span>
-              <SvgIcon v-if="language === locale" class="ml-5 w-4 h-4" name="check" />
+              {{ languages[language] }}
             </div>
           </MenuItem>
         </MenuItems>
       </Menu>
       <Menu v-if="userIsAuthenticated" as="div" class="relative ml-6">
         <MenuButton class="flex items-center text-white focus:outline-none">
-          <img class="h-10 w-10 rounded-full" :src="'https://ddragon.leagueoflegends.com/cdn/' + $store.state.versionDddragonLol + '/img/profileicon/' + user.riot_summoner.profileIconId + '.png'"/>
+          <img class="h-10 w-10 rounded-full" :src="userProfileIcon" />
         </MenuButton>
         <MenuItems class="absolute p-2 mt-2 bg-white right-0 rounded">
           <MenuItem as="div" class="flex" >
@@ -64,13 +63,12 @@ import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { useI18n } from 'vue-i18n/index'
 import { useLocalStorage } from '@vueuse/core'
 import { useStore } from 'vuex'
-import { onMounted, ref, computed } from 'vue'
-import SvgIcon from "../SvgIcon.vue";
+import { onMounted, computed } from 'vue'
 
 // User
 const store = useStore()
 const userIsAuthenticated = computed(() => store.getters['auth/isAuthenticated'])
-const user = computed(() => store.getters['auth/getUser'])
+const userProfileIcon = computed(() => store.getters['getProfileIcon'])
 const userLogout = () => store.dispatch('auth/logout')
 
 // Languages
