@@ -38,7 +38,7 @@
               {{ $t(`form.errors.${passwordError.key}`, passwordError.values) }}
             </span>
           </div>
-          <div class="flex flex-col 2xl:ml-auto mt-4 2xl:mt-0">
+          <div class="flex flex-col 2xl:ml-auto mt-4 2xl:mt-0 2xl:w-1/2">
             <label for="pwd_confirm" class="text-tkt-text-primary">{{ $t('form.password_confirm.label') }}</label>
             <input class="form-input text-input" v-model="passswordConfirm" 
                    type="password" :placeholder="$t('form.password_confirm.placeholder')" >
@@ -71,7 +71,7 @@
 import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import { useField, useForm } from 'vee-validate'
-import * as yup from 'yup';
+import * as yup from 'yup'
 
 const axios = inject('axios')
 const router = useRouter()

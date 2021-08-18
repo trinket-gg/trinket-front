@@ -20,7 +20,8 @@
     "submit": "Se connecter"
   },
   "profile": {
-    "submit": "Sauvegarder"
+    "submit": "Sauvegarder",
+    "verifyCode": "Vérifier le code"
   },
   "form": {
     "errors": {
@@ -31,7 +32,8 @@
       "matchPwds": "Les mots de passes doivent correspondre",
       "login": "Problème dans l'email ou le mot passe",
       "emailExist": "L'email existe déjà",
-      "usernameRiot": "Le nom d'utilisateur lol n'existe pas"
+      "usernameRiot": "Le nom d'utilisateur lol n'existe pas",
+      "codesDoNotMatch": "Les codes ne correspondent pas"
     },
     "email": {
       "label": "Email",

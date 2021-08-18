@@ -20,7 +20,8 @@
     "submit": "Sign in"
   },
   "profile": {
-    "submit": "Save"
+    "submit": "Save",
+    "verifyCode": "Verify code"
   },
   "form": {
     "errors": {
@@ -31,7 +32,8 @@
       "matchPwds": "Passwords must match",
       "login": "Error in the email or the password",
       "emailExist": "Email already exist",
-      "usernameRiot": "Summoner name doesn't exist"
+      "usernameRiot": "Summoner name doesn't exist",
+      "codesDoNotMatch": "The codes do not match"
     },
     "email": {
       "label": "Email",

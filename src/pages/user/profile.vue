@@ -2,11 +2,13 @@
   <div class="flex flex-col pt-20">
     <div class="flex items-center">
       <img class="h-26 w-26 rounded-full" :src="'https://ddragon.leagueoflegends.com/cdn/' + $store.state.versionDddragonLol + '/img/profileicon/' + user.riot_summoner.profileIconId + '.png'"/>
-      <h1 class="text-5xl text-white font-semibold ml-8">{{ user.riot_summoner.name }}</h1>
+      <h1 class="text-5xl text-white font-semibold ml-8 mr-4">{{ user.riot_summoner.name }}</h1>
+      <SvgIcon v-if="user.riotAccountValidate" class="text-green-500 h-4 w-4" name="check-circle" />
+      <SvgIcon v-else class="text-red-500 h-9 w-9" name="close-circle" />
     </div>
     <form class="flex flex-col" @submit.prevent="onSubmit">
       <div class="flex">
-        <div class="flex flex-col mt-4 w-1/2">
+        <div class="flex flex-col mt-4 w-1/2 mr-4">
           <label for="email" class="text-tkt-text-primary">{{ $t('form.email.label') }}</label>
           <input class="form-input text-input" v-model="email" autocomplete="email"
                  type="text" :placeholder="$t('form.email.placeholder')" >
@@ -14,17 +16,7 @@
             {{ $t(`form.errors.${emailError.key}`, emailError.values) }}
           </span>
         </div>
-        <div class="flex flex-col mt-4 w-1/2 ml-4">
-          <label for="username_lol" class="text-tkt-text-primary">{{ $t('form.username.label') }} (League of Legends)</label>
-          <input class="form-input text-input" v-model="username_riot" 
-                 type="text" :placeholder="$t('form.username.placeholder')" >
-          <span v-if="usernameRiotError" class="mt-2 text-red-600">
-            {{ $t(`form.errors.${usernameRiotError.key}`, usernameRiotError.values) }}
-          </span>
-        </div>
-      </div>
-      <div class="flex">
-        <div class="flex flex-col w-1/4 mt-4">
+        <div class="flex flex-col mt-4 w-1/2">
           <label for="birthday" class="text-tkt-text-primary">{{ $t('form.birthdate.label') }}</label>
           <input class="form-input text-input" v-model="birthdate" type="date" >
           <span v-if="birthdateError" class="mt-2 text-red-600">
@@ -46,6 +38,18 @@
         </button>
       </div>
     </form>
+    <div v-if="!user.riotAccountValidate" class="flex flex-col mt-12">
+      <h1 class="text-xl text-tkt-text-primary mb-4">Veuillez verifier votre compte league of legends :</h1>
+      <div class="flex justify-center items-center w-max px-20 py-6 bg-tkt-black rounded-xl text-white">
+        {{ randomString }}
+      </div>
+      <span v-if="verifyCodeError" class="mt-2 text-red-600">
+        {{ $t(`form.errors.${verifyCodeError}`) }}
+      </span>
+      <button :class="verifyCodeError ? 'mt-2' : 'mt-6'" class="btn btn-primary w-max p-3 text-xl" @click="verifyRiotCode">
+        {{ $t('profile.verifyCode') }}
+      </button>
+    </div>
   </div>
 </template>
 
@@ -57,19 +61,32 @@ import { useStore } from 'vuex'
 import * as yup from 'yup';
 
 const store = useStore()
-const user = computed(() => store.getters['auth/getUser'])
 const axios = inject('axios')
+const user = computed(() => store.getters['auth/getUser'])
+
+// Code riot verification
+const verifyCodeError = ref(null)
+const randomString = 'dasdas'
+
+const verifyRiotCode = async () => {
+  try {
+    await axios.post(`/users/verifyRiotCode/${user.value._id}`, { generatedCode: randomString })
+    await store.dispatch('initApp')
+  } catch (e) {
+    if (e.response.data) verifyCodeError.value = e.response.data
+  }
+}
+
+// Signup
 const loading = ref(false)
 const signupError = ref(null)
 
 const schemaSignup = yup.object({
   email: yup.string().required().email(),
-  username_riot: yup.string().required(),
   birthdate: yup.date().required()
 })
 
 const { handleSubmit } = useForm({ validationSchema: schemaSignup })
-
 const onSubmit = handleSubmit( async (values) => {
   loading.value = true
   try {
@@ -83,7 +100,6 @@ const onSubmit = handleSubmit( async (values) => {
 })
 
 const { value: email, errorMessage: emailError } = useField('email', [], { initialValue: user.value.email })
-const { value: username_riot, errorMessage: usernameRiotError } = useField('username_riot', [], { initialValue: user.value.riot_summoner.name })
 const { value: birthdate, errorMessage: birthdateError } = useField('birthdate', [], { initialValue: user.value.birthdate.split('T')[0] })
 
 </script>
