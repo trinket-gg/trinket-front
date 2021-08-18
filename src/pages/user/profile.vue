@@ -58,7 +58,7 @@
 import { computed, inject, ref } from 'vue'
 import { useField, useForm } from 'vee-validate'
 import { useStore } from 'vuex'
-import * as yup from 'yup';
+import { object, string, date } from 'yup'
 
 const store = useStore()
 const axios = inject('axios')
@@ -81,9 +81,9 @@ const verifyRiotCode = async () => {
 const loading = ref(false)
 const signupError = ref(null)
 
-const schemaSignup = yup.object({
-  email: yup.string().required().email(),
-  birthdate: yup.date().required()
+const schemaSignup = object({
+  email: string().required().email(),
+  birthdate: date().required()
 })
 
 const { handleSubmit } = useForm({ validationSchema: schemaSignup })

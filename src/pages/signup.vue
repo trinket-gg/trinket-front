@@ -71,19 +71,19 @@
 import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
 import { useField, useForm } from 'vee-validate'
-import * as yup from 'yup'
+import { object, string, date, ref } from 'yup'
 
 const axios = inject('axios')
 const router = useRouter()
 const loading = ref(false)
 const signupError = ref(null)
 
-const schemaSignup = yup.object({
-  email: yup.string().required().email(),
-  username_riot: yup.string().required(),
-  birthdate: yup.date().required(),
-  password: yup.string().required().min(8),
-  passswordConfirm: yup.string().required().oneOf([yup.ref('password')], 'matchPwds')
+const schemaSignup = object({
+  email: string().required().email(),
+  username_riot: string().required(),
+  birthdate: date().required(),
+  password: string().required().min(8),
+  passswordConfirm: string().required().oneOf([ref('password')], 'matchPwds')
 })
 
 const { handleSubmit } = useForm({ validationSchema: schemaSignup })

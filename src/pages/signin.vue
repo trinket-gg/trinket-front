@@ -46,16 +46,16 @@ import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { useField, useForm } from 'vee-validate'
-import * as yup from 'yup'
+import { object, string } from 'yup'
 
 const store = useStore()
 const router = useRouter()
 const loading = ref(false)
 const showLoginError = ref(false)
 
-const schemaSignup = yup.object({
-  email: yup.string().required().email(),
-  password: yup.string().required().min(8),
+const schemaSignup = object({
+  email: string().required().email(),
+  password: string().required().min(8),
 })
 
 const { handleSubmit } = useForm({ validationSchema: schemaSignup })
