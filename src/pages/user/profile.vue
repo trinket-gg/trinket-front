@@ -3,7 +3,7 @@
     <div class="flex items-center">
       <img class="h-26 w-26 rounded-full" :src="'https://ddragon.leagueoflegends.com/cdn/' + $store.state.versionDddragonLol + '/img/profileicon/' + user.riot_summoner.profileIconId + '.png'"/>
       <h1 class="text-5xl text-white font-semibold ml-8 mr-4">{{ user.riot_summoner.name }}</h1>
-      <SvgIcon v-if="user.riotAccountValidate" class="text-green-500 h-4 w-4" name="check-circle" />
+      <SvgIcon v-if="user.riotAccountValidate" class="text-green-500 h-9 w-9" name="check-circle" />
       <SvgIcon v-else class="text-red-500 h-9 w-9" name="close-circle" />
     </div>
     <form class="flex flex-col" @submit.prevent="onSubmit">
@@ -66,7 +66,7 @@ const user = computed(() => store.getters['auth/getUser'])
 
 // Code riot verification
 const verifyCodeError = ref(null)
-const randomString = 'dasdas'
+const randomString = Math.random().toString(36).substring(2, 15);
 
 const verifyRiotCode = async () => {
   try {
