@@ -40,7 +40,8 @@ export default defineConfig({
       },
     }),
     vueI18n({
-      include: path.resolve(__dirname, 'src/locales/**')
+      include: path.resolve(__dirname, 'src/locales/**'),
+      runtimeOnly: false
     })
   ],
   server: {
