@@ -68,9 +68,6 @@
 
 <script setup>
 
-import { ref, inject } from 'vue'
-import { useRouter } from 'vue-router'
-import { useField, useForm } from 'vee-validate'
 import { object, string, date, ref as yup_ref } from 'yup'
 
 const axios = inject('axios')

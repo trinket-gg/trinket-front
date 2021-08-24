@@ -60,10 +60,7 @@
 <script setup>
 
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
-import { useI18n } from 'vue-i18n/index'
 import { useLocalStorage } from '@vueuse/core'
-import { useStore } from 'vuex'
-import { onMounted, computed } from 'vue'
 
 // User
 const store = useStore()

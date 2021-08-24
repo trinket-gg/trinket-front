@@ -42,10 +42,6 @@
 
 <script setup>
 
-import { ref } from 'vue'
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
-import { useField, useForm } from 'vee-validate'
 import { object, string } from 'yup'
 
 const store = useStore()

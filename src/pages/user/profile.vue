@@ -55,9 +55,6 @@
 
 <script setup>
 
-import { computed, inject, ref } from 'vue'
-import { useField, useForm } from 'vee-validate'
-import { useStore } from 'vuex'
 import { object, string, date } from 'yup'
 
 const store = useStore()
@@ -92,7 +89,6 @@ const onSubmit = handleSubmit( async (values) => {
   try {
     await axios.patch(`/users/${user.value._id}`, values)
     await store.dispatch('initApp')
-    username_riot.value = user.value.riot_summoner.name
   } catch (e) {
     signupError.value = e.response.data
   }
