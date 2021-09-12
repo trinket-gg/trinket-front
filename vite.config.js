@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import WindiCSS from 'vite-plugin-windicss'
-import ViteComponents from 'vite-plugin-components'
+import Components from 'unplugin-vue-components/vite'
+import { HeadlessUiResolver } from 'unplugin-vue-components/resolvers'
 import Pages from "vite-plugin-pages"
 import viteSvgIcons from 'vite-plugin-svg-icons'
 import path from 'path'
@@ -26,7 +27,10 @@ export default defineConfig({
     }),
     Pages(),
     WindiCSS(),
-    ViteComponents(),
+    Components({
+      resolvers: [HeadlessUiResolver()],
+      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+    }),
     viteSvgIcons({
       iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
       symbolId: 'icon-[dir]-[name]',
@@ -40,7 +44,7 @@ export default defineConfig({
       },
     }),
     vueI18n({
-      include: path.resolve(__dirname, 'src/locales/**'),
+      include: path.resolve(__dirname, 'src/i18n/translations/**'),
       runtimeOnly: false
     })
   ],

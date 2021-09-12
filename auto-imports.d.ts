@@ -37,6 +37,8 @@ declare global {
   const onDeactivated: typeof import('vue')['onDeactivated']
   const onServerPrefetch: typeof import('vue')['onServerPrefetch']
   const onErrorCaptured: typeof import('vue')['onErrorCaptured']
+  const onRenderTracked: typeof import('vue')['onRenderTracked']
+  const onRenderTriggered: typeof import('vue')['onRenderTriggered']
   const useRouter: typeof import('vue-router')['useRouter']
   const useRoute: typeof import('vue-router')['useRoute']
   const useI18n: typeof import('vue-i18n')['useI18n']

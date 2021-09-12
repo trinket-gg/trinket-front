@@ -59,7 +59,6 @@
 
 <script setup>
 
-import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { useLocalStorage } from '@vueuse/core'
 
 // User
