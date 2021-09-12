@@ -21,8 +21,8 @@
         <MenuItems class="absolute p-2 mt-3 right-0 bg-white rounded">
           <MenuItem v-for="language in availableLocales" :key="language">
             <div :class="[language === locale ? 'bg-tkt-primary bg-opacity-45' : 'hover:(bg-tkt-black-bg-hover bg-opacity-10)']"
-                 class="flex items-center px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none"
-                 @click="changeLocaleLanguage(language)">
+                class="flex items-center px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none"
+                @click="changeLocaleLanguage(language)">
               {{ languages[language] }}
             </div>
           </MenuItem>
@@ -35,7 +35,7 @@
         <MenuItems class="absolute p-2 mt-2 bg-white right-0 rounded">
           <MenuItem as="div" class="flex" >
             <router-link to="/user/profile" 
-                         class="w-full px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none hover:(bg-tkt-black-bg-hover bg-opacity-10)">
+                        class="w-full px-2 py-1 not-first:mt-1 rounded cursor-pointer select-none hover:(bg-tkt-black-bg-hover bg-opacity-10)">
               {{ $t('navbar.profile') }}
             </router-link>
           </MenuItem>

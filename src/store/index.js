@@ -36,7 +36,11 @@ const store = createStore({
   },
   getters: {
     getProfileIcon: (state) => {
-      return `https://ddragon.leagueoflegends.com/cdn/${state.versionDddragonLol}/img/profileicon/${state.auth.user.riot_summoner.profileIconId}.png`
+      if (state.versionDddragonLol && state.auth.user?.riot_summoner?.profileIconId) {
+        return `https://ddragon.leagueoflegends.com/cdn/${state.versionDddragonLol}/img/profileicon/${state.auth.user.riot_summoner.profileIconId}.png`
+      } else {
+        return '/loading_bg.png'
+      }
     }
   }
 })
