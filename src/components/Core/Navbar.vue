@@ -68,7 +68,7 @@ const userProfileIcon = computed(() => store.getters['getProfileIcon'])
 const userLogout = () => store.dispatch('auth/logout')
 
 // Languages
-onMounted( async () => locale.value = selectedLanguage.value)
+onMounted(() => locale.value = selectedLanguage.value)
 const languages = { en: 'English', fr: 'Français' }
 const { locale, availableLocales } = useI18n({ useScope: 'global' })
 const navigatorLanguage = navigator.language.split('-')[0]
